@@ -43,6 +43,8 @@
 #define ENDPOINT_TRANSIMIT_ONLY		0x15
 #define ENDPOINT_RECEIVE_ONLY		0x19
 #define ENDPOINT_TRANSMIT_AND_RECEIVE	0x1D
+#define ENDPOINT_RECEIVE_ISOCHRONOUS	0x18
+#define ENDPOINT_TRANSMIT_ISOCHRONOUS	0x14
 
 /*
 Each group of #define lines below corresponds to one of the
@@ -144,9 +146,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','J','o','y','s','t','i','c','k'}
   #define PRODUCT_NAME_LEN	23
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         5
+  #define NUM_ENDPOINTS         6
   #define NUM_USB_BUFFERS	24
-  #define NUM_INTERFACE		4
+  #define NUM_INTERFACE		5
   #define SEREMU_INTERFACE      2	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -158,6 +160,10 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define KEYBOARD_ENDPOINT     3
   #define KEYBOARD_SIZE         8
   #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    4	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     6
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
   #define MOUSE_INTERFACE       1	// Mouse
   #define MOUSE_ENDPOINT        5
   #define MOUSE_SIZE            8
@@ -171,6 +177,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSIMIT_ONLY
 
 #elif defined(USB_SERIAL_HID)
   #define VENDOR_ID		0x16C0
@@ -252,7 +259,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'T','e','e','n','s','y','d','u','i','n','o',' ','R','a','w','H','I','D'}
   #define PRODUCT_NAME_LEN	18
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         6
+  #define NUM_ENDPOINTS         4
   #define NUM_USB_BUFFERS	12
   #define NUM_INTERFACE		2
   #define RAWHID_INTERFACE      0	// RawHID
@@ -334,6 +341,34 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
   #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_AUDIO)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0485  // TODO: assign unique
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','A','u','d','i','o'}
+  #define PRODUCT_NAME_LEN	12
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         4
+  #define NUM_USB_BUFFERS	16
+  #define NUM_INTERFACE		4
+  #define SEREMU_INTERFACE      3	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define AUDIO_INTERFACE	0	// Audio (uses 3 consecutive interfaces)
+  #define AUDIO_TX_ENDPOINT     3
+  #define AUDIO_TX_SIZE         180
+  #define AUDIO_RX_ENDPOINT     4
+  #define AUDIO_RX_SIZE         180
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ISOCHRONOUS
 
 #endif
 
